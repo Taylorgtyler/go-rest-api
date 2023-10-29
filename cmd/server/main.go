@@ -1,15 +1,25 @@
 package main
 
 import (
+	"log"
+
+	"github.com/Taylorgtyler/go-rest-api/cmd/pkg/database"
 	"github.com/Taylorgtyler/go-rest-api/cmd/pkg/handlers"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	r := gin.Default()
+	// Initialize the database
+	db, err := database.InitDB()
+	if err != nil {
+		log.Fatalf("Error initializing database: %v", err)
+	}
 
-	// Registering handlers or routes
-	handlers.RegisterRoutes(r)
+	r := gin.Default() // Creates a router without any middleware by default
 
-	r.Run(":8080") // listen and serve on :8080
+	// Set up your routes
+	handlers.SetupRoutes(r, db)
+
+	// Start the server
+	r.Run(":8080") // listen and serve on 0.0.0.0:8080
 }

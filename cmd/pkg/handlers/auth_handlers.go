@@ -13,7 +13,7 @@ import (
 
 var jwtKey = []byte("your_secret_key")
 
-func RegisterUser(c *gin.Context) {
+func RegisterNewUser(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 
 	var newUser models.User

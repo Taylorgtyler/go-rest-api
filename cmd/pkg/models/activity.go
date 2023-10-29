@@ -13,5 +13,6 @@ type Activity struct {
 	Description string
 	DueDate     time.Time
 	Completed   bool
-	ListID      uint
+	ListID      int
+	List        List
 }

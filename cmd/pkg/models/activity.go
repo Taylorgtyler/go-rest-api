@@ -1,6 +1,7 @@
 package models
 
 import (
+	"database/sql"
 	"time"
 
 	"gorm.io/gorm"
@@ -14,6 +15,6 @@ type Activity struct {
 	CreatedAt   time.Time
 	DueDate     time.Time
 	Completed   bool
-	ListID      int
+	ListID      sql.NullInt64 `gorm:"default:NULL"`
 	List        List
 }

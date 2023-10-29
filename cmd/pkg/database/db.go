@@ -23,7 +23,7 @@ func InitDB() (*gorm.DB, error) {
 
 	// Open a new database connection with a specific log level
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{
-		Logger: logger.Default.LogMode(logger.Info), // Change logger.Info to logger.Error in production
+		Logger: logger.Default.LogMode(logger.Error),
 	})
 	if err != nil {
 		return nil, err

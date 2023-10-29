@@ -11,6 +11,7 @@ type Activity struct {
 	ID          uint
 	Name        string
 	Description string
+	CreatedAt   time.Time
 	DueDate     time.Time
 	Completed   bool
 	ListID      int

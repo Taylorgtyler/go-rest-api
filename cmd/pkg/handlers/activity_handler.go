@@ -7,3 +7,7 @@ import (
 func CreateActivity(r *gin.Engine) {
 
 }
+
+func UpdateActivity(r *gin.Engine) {
+
+}

@@ -13,30 +13,6 @@ import (
 
 var jwtKey = []byte("your_secret_key")
 
-func RegisterNewUser(c *gin.Context) {
-	db := c.MustGet("db").(*gorm.DB)
-
-	var newUser models.User
-	if err := c.ShouldBindJSON(&newUser); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(newUser.Password), bcrypt.DefaultCost)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-
-	newUser.Password = string(hashedPassword)
-	if err := db.Create(&newUser).Error; err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"message": "User registered successfully"})
-}
-
 func LoginUser(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
 

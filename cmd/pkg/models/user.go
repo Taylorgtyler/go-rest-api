@@ -11,6 +11,7 @@ type User struct {
 	ID        uint
 	Username  string
 	Password  string
+	Email     string
 	FirstName string
 	LastName  string
 	CreatedAt time.Time

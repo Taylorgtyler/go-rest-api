@@ -11,7 +11,6 @@ func RunMigrations(db *gorm.DB) {
 	err := db.AutoMigrate(
 		&models.Activity{},
 		&models.List{},
-		&models.Notification{},
 		&models.User{})
 
 	if err != nil {

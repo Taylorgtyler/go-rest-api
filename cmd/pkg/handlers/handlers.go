@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/Taylorgtyler/go-rest-api/cmd/pkg/middleware"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
@@ -13,10 +14,11 @@ func SetupRoutes(r *gin.Engine, db *gorm.DB) {
 		c.Next()
 	})
 
-	// Define your routes here
+	// Define your routes here and add authentication middleware for routes you want to password protect
+	// Middleware can also be implemented globally
 	r.POST("/register", RegisterNewUser)
 	r.POST("/login", LoginUser)
-	r.POST("/activity", CreateActivityHandler)
-	r.PUT("/activity/:id", UpdateActivity(db))
-	r.POST("activities", InsertMultipleActivitiesHandler(db))
+	r.POST("/activity", middleware.Authenticate(), CreateActivityHandler)
+	r.PUT("/activity/:id", middleware.Authenticate(), UpdateActivity(db))
+	r.POST("activities", middleware.Authenticate(), InsertMultipleActivitiesHandler(db))
 }

@@ -5,6 +5,7 @@ import (
 
 	"github.com/Taylorgtyler/go-rest-api/cmd/pkg/database"
 	"github.com/Taylorgtyler/go-rest-api/cmd/pkg/handlers"
+	"github.com/Taylorgtyler/go-rest-api/cmd/pkg/migrations"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,6 +15,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("Error initializing database: %v", err)
 	}
+
+	migrations.RunMigrations(db)
 
 	r := gin.Default() // Creates a router without any middleware by default
 
